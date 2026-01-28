@@ -11,6 +11,13 @@
       url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.svg#Beech") format("svg");
   }
 
+  body {
+    font-family: sans-serif;
+    overflow: hidden;
+    background-color: black;
+    margin: 0;
+  }
+
   h1 {
     color: red;
     text-shadow:
@@ -21,6 +28,18 @@
     position: absolute;
     font-family: Beech;
     font-size: 50px;
+    white-space: nowrap;
+  }
+
+  /* The Wave Animation Logic */
+  .wave-letter {
+    display: inline-block;
+    animation: letterJump 2s infinite ease-in-out;
+  }
+
+  @keyframes letterJump {
+    0%, 30%, 100% { transform: translateY(0); }
+    15% { transform: translateY(-20px); } /* Moves up */
   }
 
   .top {
@@ -33,12 +52,6 @@
     top: 85%;
     left: 50%;
     transform: translate(-50%, -50%);
-  }
-
-  body {
-    font-family: sans-serif;
-    overflow: hidden;
-    background-color: black;
   }
 
   div {
@@ -64,11 +77,10 @@
 </audio>
 
 <div class="container">
-  <!-- New Image Link Applied Below -->
   <img src="https://raw.githubusercontent.com/SanikkuDesu/GmodServerLoadingStuff/refs/heads/main/image.png" style="width: 150%; position: absolute; top: 0px; left: 0px;" />
 
-  <h1 class="top" id="top">Remember where to enter</h1>
-  <h1 class="bottom" id="bottom">fart</h1>
+  <h1 class="top" id="top"></h1>
+  <h1 class="bottom" id="bottom"></h1>
 </div>
 
 <script>
@@ -81,9 +93,10 @@
     "IT'S A TERRIBLE NIGHT",
     "SPORE CREEPY AND",
     "ANGRY",
-    "ASTRO WAR",
-    "6",
+    "THE GROX WERE BABIES", // Changed from ASTRO WAR
+    "WE ALWAYS",           // Changed from 6
   ];
+  
   var texts2 = [
     "THE DOOR TO ENTER IS AMBER.",
     "IN THEIR PLACE",
@@ -93,15 +106,34 @@
     "TO HAVE A CURSE",
     "CUTE PART PACK",
     "MOON",
-    "INVADERS FROM SPACE",
-    "",
+    "SO IS THE BUG",        // Changed from INVADERS FROM SPACE
+    "COME BACK!",           // Changed from empty
   ];
 
+  // Pick a random line
   var r = Math.floor(Math.random() * texts.length);
-  document.getElementById("top").innerHTML = texts[r];
-  document.getElementById("bottom").innerHTML = texts2[r];
+  
+  // Function to wrap letters in spans for the animation
+  function animateText(elementId, textString) {
+    var element = document.getElementById(elementId);
+    element.innerHTML = ""; // Clear current text
+    
+    textString.split("").forEach(function(char, index) {
+      var span = document.createElement("span");
+      // Use non-breaking space for actual spaces so they don't collapse
+      span.textContent = char === " " ? "\u00A0" : char; 
+      span.className = "wave-letter";
+      // Offset each letter by 0.1s to create the wave effect
+      span.style.animationDelay = (index * 0.1) + "s";
+      element.appendChild(span);
+    });
+  }
 
-  // New Music Link Applied Below
+  // Apply the text and the animation
+  animateText("top", texts[r]);
+  animateText("bottom", texts2[r]);
+
+  // Audio Logic
   var audios = [
     "https://raw.githubusercontent.com/SanikkuDesu/GmodServerLoadingStuff/refs/heads/main/music.mp3"
   ];
