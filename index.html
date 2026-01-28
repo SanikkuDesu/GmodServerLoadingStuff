@@ -1,14 +1,28 @@
---- START OF FILE index.html ---
-
 <style>
+  /* --- FONT DEFINITIONS --- */
+  
+  /* 1. The one we started with */
   @font-face {
     font-family: "Beech";
-    src: url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.eot");
-    src: url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.eot?#iefix") format("embedded-opentype"),
-      url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.woff2") format("woff2"),
-      url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.woff") format("woff"),
-      url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.ttf") format("truetype"),
-      url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.svg#Beech") format("svg");
+    src: url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.ttf") format("truetype");
+  }
+
+  /* 2. Plastic Machine */
+  @font-face {
+    font-family: "PlasticMachine";
+    src: url("https://raw.githubusercontent.com/SanikkuDesu/GmodServerLoadingStuff/refs/heads/main/PLASTICMACHINE_0.OTF") format("opentype");
+  }
+
+  /* 3. Gonbuto Strike */
+  @font-face {
+    font-family: "GonbutoStrike";
+    src: url("https://raw.githubusercontent.com/SanikkuDesu/GmodServerLoadingStuff/refs/heads/main/GONBUTOSTRIKE_0.OTF") format("opentype");
+  }
+
+  /* 4. Lava Letter */
+  @font-face {
+    font-family: "LavaLetter";
+    src: url("https://raw.githubusercontent.com/SanikkuDesu/GmodServerLoadingStuff/refs/heads/main/LAVALETTER_0.OTF") format("opentype");
   }
 
   body {
@@ -18,32 +32,61 @@
     margin: 0;
   }
 
-  h1 {
-    color: red;
-    text-shadow:
-      -2px -2px 0 #000,
-      2px -2px 0 #000,
-      -2px 2px 0 #000,
-      2px 2px 0 #000;
-    position: absolute;
-    font-family: Beech;
-    font-size: 50px;
-    white-space: nowrap;
+  .container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
   }
 
-  /* The Wave Animation Logic */
-  .wave-letter {
+  /* Background Image Animation */
+  img.bg-anim {
+    width: 150%;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: -1;
+    animation: zoom-in-zoom-out 50s ease infinite;
+  }
+
+  h1 {
+    position: absolute;
+    /* Default font, will be overridden by JS */
+    font-family: "Beech"; 
+    font-size: 50px;
+    white-space: nowrap;
+    transform-origin: center bottom; 
+    
+    /* GRADIENT TEXT SETUP */
+    background: linear-gradient(to top, #500000 10%, #ff0000 50%, #ff99cc 90%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    /* HARD OUTLINE */
+    filter: 
+        drop-shadow(2px 0px 0px black) 
+        drop-shadow(-2px 0px 0px black)
+        drop-shadow(0px 2px 0px black) 
+        drop-shadow(0px -2px 0px black);
+  }
+
+  /* WAVE ANIMATION FOR INDIVIDUAL LETTERS */
+  h1 span {
     display: inline-block;
     animation: letterJump 2s infinite ease-in-out;
+    background: inherit;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
 
   @keyframes letterJump {
     0%, 30%, 100% { transform: translateY(0); }
-    15% { transform: translateY(-20px); } /* Moves up */
+    15% { transform: translateY(-20px); } 
   }
 
   .top {
-    top: 5%;
+    top: 15%; 
     left: 50%;
     transform: translate(-50%, -50%);
   }
@@ -54,12 +97,58 @@
     transform: translate(-50%, -50%);
   }
 
-  div {
-    text-align: center;
+  /* ENTRANCE/EXIT ANIMATIONS */
+  .anim-enter {
+    animation: unityBounceIn 1.5s forwards; 
   }
 
-  img {
-    animation: zoom-in-zoom-out 50s ease infinite;
+  .anim-exit {
+    animation: explodeFall 0.8s forwards ease-in;
+  }
+
+  @keyframes unityBounceIn {
+    0% {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(2, 0.2); 
+      margin-top: 0px;
+    }
+    25% {
+      transform: translate(-50%, -50%) scale(1, 0.2); 
+      margin-top: -30px; 
+    }
+    26% {
+      transform: translate(-50%, -50%) scale(1, 1); 
+      margin-top: 0px; 
+    }
+    27% {
+      transform: translate(-50%, -50%) scale(1, 1);
+      margin-top: -200px; 
+    }
+    40% { margin-top: 0px; }
+    55% { margin-top: -40px; }
+    70% { margin-top: 0px; }
+    82% { margin-top: -15px; }
+    92% { margin-top: 0px; }
+    96% { margin-top: -5px; }
+    100% {
+      transform: translate(-50%, -50%) scale(1, 1);
+      margin-top: 0px; 
+      opacity: 1;
+    }
+  }
+
+  @keyframes explodeFall {
+    0% {
+      transform: translate(-50%, -50%) scale(1, 1);
+      margin-top: 0px;
+      opacity: 1;
+    }
+    100% {
+      transform: translate(-50%, -50%) scale(3, 3);
+      margin-top: 300px;
+      opacity: 0;
+      filter: blur(4px);
+    }
   }
 
   @keyframes zoom-in-zoom-out {
@@ -72,75 +161,210 @@
   }
 </style>
 
-<audio id="vid" controls autoplay>
+<audio id="vid" autoplay loop style="display:none;">
   <source src="https://raw.githubusercontent.com/SanikkuDesu/GmodServerLoadingStuff/refs/heads/main/music.mp3" type="audio/mpeg">
 </audio>
 
 <div class="container">
-  <img src="https://raw.githubusercontent.com/SanikkuDesu/GmodServerLoadingStuff/refs/heads/main/image.png" style="width: 150%; position: absolute; top: 0px; left: 0px;" />
+  <img class="bg-anim" src="https://raw.githubusercontent.com/SanikkuDesu/GmodServerLoadingStuff/refs/heads/main/image.png"/>
 
   <h1 class="top" id="top"></h1>
   <h1 class="bottom" id="bottom"></h1>
 </div>
 
 <script>
-  var texts = [
-    "REMEMBER WHERE TO ENTER",
-    "AT LORDS CONVERGING",
-    "WE HAVE WAITED FOR THIS MOMENT.",
-    "THERE IS NO ESCAPE.",
-    "INFECTED ROT PLAGUES YOUR LAND.",
-    "IT'S A TERRIBLE NIGHT",
-    "SPORE CREEPY AND",
-    "ANGRY",
-    "THE GROX WERE BABIES", // Changed from ASTRO WAR
-    "WE ALWAYS",           // Changed from 6
-  ];
+  /* 
+     --- INSTRUCTIONS FOR ADDING TEXT ---
+     Add your text strings to the 'combinedTexts' array below.
+     Use a hyphen "-" to separate the top line from the bottom line.
+     
+     Format: "TOP LINE TEXT - BOTTOM LINE TEXT",
+     
+     Example: "HELLO WORLD - THIS IS A TEST",
+  */
   
-  var texts2 = [
-    "THE DOOR TO ENTER IS AMBER.",
-    "IN THEIR PLACE",
-    "WE KNOW YOUR FATE",
-    "THIS IS THE END FOR YOU.",
-    "THIS IS THE END FOR YOU.",
-    "TO HAVE A CURSE",
-    "CUTE PART PACK",
-    "MOON",
-    "SO IS THE BUG",        // Changed from INVADERS FROM SPACE
-    "COME BACK!",           // Changed from empty
-  ];
-
-  // Pick a random line
-  var r = Math.floor(Math.random() * texts.length);
-  
-  // Function to wrap letters in spans for the animation
-  function animateText(elementId, textString) {
-    var element = document.getElementById(elementId);
-    element.innerHTML = ""; // Clear current text
+  var combinedTexts = [
+    "REMEMBER WHERE TO ENTER - THE DOOR TO ENTER IS AMBER.",
+    "AT LORDS CONVERGING - IN THEIR PLACE",
+    "WE HAVE WAITED FOR THIS MOMENT. - WE KNOW YOUR FATE",
+    "THERE IS NO ESCAPE. - THIS IS THE END FOR YOU.",
+    "INFECTED ROT PLAGUES YOUR LAND. - THIS IS THE END FOR YOU.",
+    "IT'S A TERRIBLE NIGHT - TO HAVE A CURSE",
+    "SPORE CREEPY AND - CUTE PART PACK",
+    "ANGRY - MOON",
+    "THE GROX WERE BABIES - SO IS THE BUG",
+    "WE ALWAYS - COME BACK!",
+	    /* --- SERIOUS THREATS --- */
+    "WE ARE GOING TO SHOVE - YOUR HEAD INTO A WALL",
+    "YOUR BONES WILL CRUMBLE - INTO DUST BEFORE DAWN",
+    "WE ARE STANDING RIGHT - BEHIND YOU RIGHT NOW",
+    "SCREAM ALL YOU WANT - NO ONE WILL HEAR YOU",
+    "YOUR BLOOD WILL PAINT - THESE WALLS SCARLET",
+    "WE HAVE ALREADY WON - YOU JUST DONT KNOW IT YET",
+    "CLOSE YOUR EYES - IT WILL BE OVER SOON",
+    "THEY ARE COMING FOR YOU - AND THEY ARE HUNGRY",
+    "YOUR INSIDES WILL BE - YOUR OUTSIDES SOON",
+    "RESISTANCE IS FUTILE - SUBMISSION IS MANDATORY",
+    "WE WILL UNMAKE YOU - AT THE MOLECULAR LEVEL",
+    "YOUR SPINE MAKES A - LOVELY DAGGER HANDLE",
+    "WE ARE THE LAST THING - YOU WILL EVER SEE",
+    "BREAKING YOU WILL BE - OUR AFTERNOON ENTERTAINMENT",
+    "YOUR SKULL WILL MAKE - A FINE SOUP BOWL",
     
-    textString.split("").forEach(function(char, index) {
-      var span = document.createElement("span");
-      // Use non-breaking space for actual spaces so they don't collapse
-      span.textContent = char === " " ? "\u00A0" : char; 
-      span.className = "wave-letter";
-      // Offset each letter by 0.1s to create the wave effect
-      span.style.animationDelay = (index * 0.1) + "s";
-      element.appendChild(span);
-    });
-  }
+    /* --- DESPAIR & HOPELESSNESS --- */
+    "YOU CANT RUN AWAY - WE WILL KILL YOU",
+    "HOPE IS A LIE - YOU DIED LONG AGO",
+    "NO ONE IS COMING - TO SAVE YOU",
+    "YOUR GOD HAS FORSAKEN - THIS PLACE AND YOU",
+    "THE SUN WILL NEVER RISE - AGAIN FOR YOUR KIND",
+    "ALL ROADS LEAD TO - YOUR INEVITABLE END",
+    "YOU ARE ALONE HERE - COMPLETELY AND FOREVER",
+    "EVERYTHING YOU LOVE - WILL BURN WITH YOU",
+    "THERE IS NO AFTER - ONLY THE VOID",
+    "YOUR EFFORTS AMOUNT - TO ABSOLUTELY NOTHING",
+    "THE UNIVERSE FORGOT - YOU EXISTED",
+    "YOU WILL DIE IN DARKNESS - AND BE FORGOTTEN",
+    "YOUR LEGACY ENDS HERE - IN A POOL OF SHAME",
+    "NOTHING MATTERS ANYMORE - ESPECIALLY NOT YOU",
+    "THE ABYSS STARES BACK - AND IT IS HUNGRY",
+    
+    /* --- COMEDIC/ABSURD THREATS --- */
+    "I AM GOING TO RIP OFF YOUR HEAD - AND THEN PLAY BOWLING WITH IT",
+    "I WILL REPLACE YOUR KNEECAPS - WITH LEGO BRICKS",
+    "WE'RE GOING TO STEAL YOUR - SHINIES AND YOUR LUNCH MONEY",
+    "I'M GONNA TURN YOU INTO - A FUNCTIONAL OTTOMAN",
+    "WE WILL FORCE FEED YOU - CEREAL WITHOUT MILK",
+    "YOUR TOES ARE NOT SAFE - WE COLLECT THEM IN JARS",
+    "I'M GOING TO PUSH YOU - INTO THE SUN'S CORE",
+    "WE WILL TICKLE YOU UNTIL - YOU WISH FOR DEATH",
+    "YOUR COLLECTION OF FUNKO POPS - WILL BE MELTED DOWN",
+    "I WILL REPLACE YOUR BLOOD - WITH WARM MAYONNAISE",
+    "WE ARE GOING TO SHIT - ON YOUR GRAVE",
+    "I WILL STUFF YOU INTO - A LOCKER FOREVER",
+    "YOUR GAMER SCORE WILL BE - RESET TO ZERO",
+    "WE WILL DELETE YOUR - MINECRAFT WORLD SAVE",
+    "I'M GOING TO HUG YOU - UNTIL YOU STOP BREATHING",
+    
+    /* --- FURRY-RELATED CONTENT --- */
+    "WE SKIN FURRIES AND - TURN THEM INTO PELTS HERE",
+    "WE DONT LIKE FARTING BUGS - GO AWAY",
+    "WE BURN FAT ANIMALS - FOR WARMTH HERE",
+    "YOUR TAIL IS TICKLING - MY LAST NERVE",
+    "WHOLESOME DETECTED - LETHAL FORCE ENGAGED",
+    "THIS IS A - ZONE OF EXTREME PREJUDICE",
+    "WE DON'T SERVE - PEOPLE IN ANIMAL COSTUMES",
+    "YOUR ARE GOING - THE GAS CHAMBER",
+    "MORE THAN A SERVER - A PENITANCE CHAMBER",
+    "WELCOME TO HELL - FOREVER AND EVER",
+    "WE SKIN FURRIES - FOR CARPET MATERIAL",
+    "KEEP YOUR HANDS - WHERE I CAN SEE THEM",
+    "BAD DOG - NO TREATS FOR YOU",
+    "TAKE YOUR FAT BEHAVIOR - ELSEWHERE FREAK",
+    "PROTOGENS MORE LIKE - PROTO-GONE",
+    "YOUR FURSONA IS CRINGE - AND SO ARE YOU",
+	  "YOUR DOOM IS SEALED - NO MERCY AWAITS",
+  "WE WILL HUNT YOU DOWN - UNTIL YOUR LAST BREATH",
+  "BUGS GET STUFFED - INTO TAXIDERMY DISPLAYS",
+  "DESPAIR GRIPS YOUR SOUL - DEATH IS YOUR ONLY RELEASE",
+  "I'M GONNA TIE YOU UP - AND USE YOU AS A PINATA",
+  "NO HOPE LEFT FOR YOU - THE VOID CONSUMES ALL",
+  "WE ARE ANIMALS WHO KILL - PEOPLE PRETENDING TO BE ANIMALS",
+  "YOUR END IS NEAR - WE'RE COMING FOR YOU",
+  "I WILL CRUSH YOUR SKULL - THEN USE IT AS A MUG",
+  "DUDE PUT THAT AWAY - THERE'S KIDS HERE",
+  "SURRENDER TO THE DARKNESS - RESISTANCE IS FUTILE",
+  "WE'RE GONNA SLICE YOU UP - LIKE A BAD PIZZA",
 
-  // Apply the text and the animation
-  animateText("top", texts[r]);
-  animateText("bottom", texts2[r]);
 
-  // Audio Logic
+  ];
+
+  // Font Options
+  var fonts = [
+    "Beech",
+    "PlasticMachine",
+    "GonbutoStrike",
+    "LavaLetter"
+  ];
+
+  // Audio setup
   var audios = [
     "https://raw.githubusercontent.com/SanikkuDesu/GmodServerLoadingStuff/refs/heads/main/music.mp3"
   ];
-
   var audio = document.getElementById("vid");
   audio.src = audios[Math.floor(Math.random() * audios.length)];
   audio.volume = 0.1;
-  audio.autoplay = true;
-  audio.load();
+  
+  var playPromise = audio.play();
+  if (playPromise !== undefined) {
+      playPromise.catch(error => {
+          console.log("Autoplay prevented");
+      });
+  }
+
+  var currentIndex = Math.floor(Math.random() * combinedTexts.length);
+  var topEl = document.getElementById("top");
+  var botEl = document.getElementById("bottom");
+
+  // Helper to split text into spans for Wave Animation
+  function generateSpans(text) {
+    if(!text) return "";
+    return text.split("").map(function(char, index) {
+        var display = char === " " ? "\u00A0" : char;
+        var delay = index * 0.1; 
+        return '<span style="animation-delay:' + delay + 's">' + display + '</span>';
+    }).join("");
+  }
+
+  function applyRandomFont() {
+      var randomFont = fonts[Math.floor(Math.random() * fonts.length)];
+      topEl.style.fontFamily = randomFont;
+      botEl.style.fontFamily = randomFont;
+  }
+
+  function setTextContent(index) {
+      // Split the string by the "-" character
+      var parts = combinedTexts[index].split("-");
+      
+      var topText = parts[0] ? parts[0].trim() : "";
+      var bottomText = parts[1] ? parts[1].trim() : ""; // Handle cases with no bottom text
+
+      topEl.innerHTML = generateSpans(topText);
+      botEl.innerHTML = generateSpans(bottomText);
+  }
+
+  // Function to handle the cycle
+  function updateText() {
+    topEl.classList.remove("anim-enter");
+    botEl.classList.remove("anim-enter");
+    
+    topEl.classList.add("anim-exit");
+    botEl.classList.add("anim-exit");
+
+    setTimeout(function() {
+        currentIndex++;
+        if(currentIndex >= combinedTexts.length) currentIndex = 0;
+
+        applyRandomFont();
+        setTextContent(currentIndex);
+
+        topEl.classList.remove("anim-exit");
+        botEl.classList.remove("anim-exit");
+
+        void topEl.offsetWidth; 
+
+        topEl.classList.add("anim-enter");
+        botEl.classList.add("anim-enter");
+
+    }, 800); 
+  }
+
+  // Initial Load
+  applyRandomFont();
+  setTextContent(currentIndex);
+  topEl.classList.add("anim-enter");
+  botEl.classList.add("anim-enter");
+
+  // Cycle every 30 seconds
+  setInterval(updateText, 30000);
+
 </script>
