@@ -1,0 +1,127 @@
+
+@font-face {
+    font-family: "Beech";
+    src: url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.eot");
+    src: url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.eot?#iefix")format("embedded-opentype"),
+    url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.woff2")format("woff2"),
+    url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.woff")format("woff"),
+    url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.ttf")format("truetype"),
+    url("https://db.onlinewebfonts.com/t/77ad444ba527da5e40f0f67a3cf6c5fc.svg#Beech")format("svg");
+}
+
+ <audio  id="vid" controls autoplay>
+  <source src="" type="audio/flac">
+</audio> 
+
+
+
+ <div class="container">
+  <img src="https://www.dropbox.com/scl/fi/s6nohv3k9vcyfxbjtdg22/Were_Gonna_Kill_you_Dude.png?rlkey=vsb8t08ijvo7fcnaz7bq3dbjx&st=ykmj4uo9&dl=1" style="width: 150%;position: absolute;top: 0px;left: 0px;"/>
+
+  <h1 class="top" id="top">Remember where to enter<p>
+  <h1 class="bottom" id="bottom">fart<p>
+
+
+</div> 
+  
+ <script>
+
+var texts = [
+  "REMEMBER WHERE TO ENTER",
+  "AT LORDS CONVERGING",
+  "WE HAVE WAITED FOR THIS MOMENT.",
+  "THERE IS NO ESCAPE.",
+  "INFECTED ROT PLAGUES YOUR LAND.",
+  "IT'S A TERRIBLE NIGHT",
+  "SPORE CREEPY AND",
+  "ANGRY",
+  "ASTRO WAR",
+  "6",
+
+
+];
+var texts2 = [
+  "THE DOOR TO ENTER IS AMBER.",
+  "IN THEIR PLACE",
+  "WE KNOW YOUR FATE",
+  "THIS IS THE END FOR YOU.",
+  "THIS IS THE END FOR YOU.",
+  "TO HAVE A CURSE",
+  "CUTE PART PACK",
+  "MOON",
+  "INVADERS FROM SPACE",
+  "",
+];
+var r =  Math.floor(Math.random()*texts.length)
+document.getElementById("top").innerHTML = texts[r];
+document.getElementById("bottom").innerHTML = texts2[r];
+
+
+var audios = [
+ "https://www.dropbox.com/scl/fi/ytfbxjxksqb49jdcbh7l7/ashawanga-soul-cleanser.flac?rlkey=s686xvwkk2tfho7rjerj09yua&st=zvbhfx4u&dl=1",
+"https://www.dropbox.com/scl/fi/49no11uuyc5271xwsp1f2/Ancient-Avarice.flac?rlkey=osdqymvynuq8zzi42l1ubomgj&st=nmi048er&dl=1",
+];
+       var audio = document.getElementById("vid");
+       audio.src = audios[Math.floor(Math.random()*audios.length)]
+       audio.volume = 0.1;
+       audio.autoplay = true;
+       audio.load();
+</script>
+
+
+
+  <style>
+    h1 { 
+	color:red;
+    text-shadow:
+    -2px -2px 0 #000,
+    2px -2px 0 #000,
+    -2px 2px 0 #000,
+    2px 2px 0 #000;  
+  position: absolute;
+font-family:Beech;
+font-size:50;
+    }
+ .top { 
+  top: 5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+ .bottom { 
+  top: 85%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+body { font-family: sans-serif; overflow:hidden; }
+
+div {
+  text-align: center;
+}
+
+img {
+  animation: zoom-in-zoom-out 50s ease infinite;
+}
+
+@keyframes zoom-in-zoom-out {
+  0% {
+transform:translate(-25%, 0%); 
+  }
+  20% {
+transform:translate(0%, 0%); 
+  }
+  40% {
+transform:translate(0%, -40%); 
+  }
+  60% {
+transform:translate(-32%, -40%); 
+  }
+  80% {
+transform:translate(-32%, 0%); 
+  }
+  100% {
+transform:translate(-25%, 0%); 
+  }
+
+    </style>
